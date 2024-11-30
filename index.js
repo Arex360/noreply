@@ -95,8 +95,9 @@ const htmlTemplate = (firstName,lastName)=>`
 
 // Route to send email
 app.post('/send-email', async (req, res) => {
+    console.log("processing")
     const { to, subject, text, first,last } = req.body;
-
+    console.log({ to, subject, text, first,last })
     // Auto-Reply Email Options
     const autoReplyOptions = {
         from: process.env.ZOHO_USER,
@@ -109,6 +110,7 @@ app.post('/send-email', async (req, res) => {
     try {
         await transporter.sendMail(autoReplyOptions);
     } catch (error) {
+        console.log(error.message)
         return res.status(500).json({
             message: 'Error sending auto-reply email',
             error: error.message,
@@ -131,6 +133,7 @@ app.post('/send-email', async (req, res) => {
             info,
         });
     } catch (error) {
+        console.log(error.message)
         res.status(500).json({
             message: 'Error sending email to admin',
             error: error.message,
