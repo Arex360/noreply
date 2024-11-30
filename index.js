@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 
@@ -6,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
+app.use(cors())
 const PORT = 5001;
 
 // Middleware to parse JSON
